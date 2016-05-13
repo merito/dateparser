@@ -674,7 +674,10 @@ class TestFreshnessDateDataParser(BaseTestCase):
 
     def when_date_is_parsed(self):
         try:
-            self.result = self.parser.get_date_data(self.date_string, relative_base_date=self.relative_base_date)
+            if self.relative_base_date is NotImplemented:
+                self.result = self.parser.get_date_data(self.date_string)
+            else:
+                self.result = self.parser.get_date_data(self.date_string, relative_base_date=self.relative_base_date)
         except Exception as error:
             self.error = error
 
